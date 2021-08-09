@@ -352,6 +352,8 @@ const intresting = function(inte){
     else
     console.log(`${inte}`)
 }
+
+
 intresting(45)
 intresting(28)
 intresting(120)

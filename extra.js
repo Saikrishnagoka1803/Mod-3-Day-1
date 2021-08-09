@@ -27,6 +27,8 @@ function findRepeated (str){
             //console.log(charmap[char])
                 }
         else{
+
+            
             charmap[char]=1
             //console.log(charmap[char])
         }
