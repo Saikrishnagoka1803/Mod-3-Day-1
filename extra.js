@@ -7,36 +7,27 @@ commonly used in the string.
     maxChar("abcccccccd") === "c"
     maxChar("apple 1231111") === "1"
 */
-function findMostRepeated (str){
-    let eachChar = (str.split(''))
-   eachChar.forEach(element => {
-       
-   });
-}
-findMostRepeated('hello')
-
-function findRepeated (str){
-    const charmap ={}
-    let max = 0
-    let maxchar = ''
-    for(let char of str ){
-        console.log(char)
-        if(charmap[char]){
-            //console.log(charmap[char])
-            charmap[char]++
-            //console.log(charmap[char])
-                }
-        else{
-
-            
-            charmap[char]=1
-            //console.log(charmap[char])
-        }
+function countChars(str) {
+  let obj = {};
+  let arrayofchars = str.split("");
+  arrayofchars.forEach((element) => {
+    if (!obj[element]) {
+      obj[element] = 0;
     }
-
+    obj[element]++;
+  });
+  let lengths = [];
+  for (let key in obj) {
+    lengths.push(obj[key]);
+  }
+  let maxvalue = Math.max(...lengths);
+  for (let ech in obj) {
+    if (obj[ech] === maxvalue) console.log(`${ech} : ${obj[ech]}`);
+  }
 }
-findRepeated('HelloWorld')
 
+ countChars('hello world')
+ countChars('saikrishnareddygoka ')
 
 /* 2) ANAGRAMS
 
@@ -51,6 +42,43 @@ or punctuation.  Consider capital letters to be the same as lower case
   anagrams('Hi there', 'Bye there') --> False
 */
 
+function anagrams(str1, str2) {
+  let ar1 = str1.split("");
+  let ar2 = str2.split("");
+  if (ar1.length === ar2.length) {
+    if (
+      ar1.forEach((ele) => {
+        ele.includes(...ar2);
+      })
+    ) {
+      console.log("anagrams");
+    }
+  } else console.log("Not Anagrams");
+}
+ anagrams('darren', 'nerrad')
+ anagrams('rail safety', 'fairy tales')
+
+function checkStringsAnagram(a, b) {
+  let len1 = a.length;
+  let len2 = b.length;
+  if (len1 !== len2) {
+    console.log("Invalid Input");
+    return;
+  }
+  let str1 = a.split("").sort();
+  console.log(str1);
+  let str2 = b.split("").sort();
+  console.log(str2);
+  if (str1 === str2) {
+     console.log("True");
+  } else {
+     console.log("False");
+  }
+}
+  checkStringsAnagram("indian!,","ndiani,!")
+  checkStringsAnagram("indian","ndaiii")
+  checkStringsAnagram('RAIL! SAFETY!', 'fairy tales')
+
 /* 3) ANAGRAMS 2
 
 Given a word and a list of possible anagrams, select the correct sublist.
@@ -59,6 +87,20 @@ Given a word and a list of possible anagrams, select the correct sublist.
 
     "listen" and a list of candidates like "enlists" "google" "inlets" "banana" the program should return a list containing "inlets".
 */
+
+function sublistanagrams(s, a) {
+  let sublist = [];
+  let temp = "";
+  let arr = s.split("").sort().join("");
+  a.forEach((ele) => {
+    temp = ele.split("").sort().join("");
+    if (temp === arr) {
+      sublist.push(ele);
+    }
+  });
+  console.log(sublist);
+}
+sublistanagrams('game',['ameg','gemu','ugem','games','gema'])
 
 /* 4) PALINDROME
 
@@ -73,6 +115,14 @@ and punctuation in determining if the string is a palindrome.
     palindrome("abcdefg") === false
  */
 
+function palindrome(str1) {
+  let rev = str1.split("").reverse().join("");
+  if (rev === str1) console.log("palindrome");
+  else console.log("Not a Palindrome");
+}
+ palindrome('apple')
+ palindrome('abba')
+
 /* 5) REVERSE INT
 
 Given an integer, return an integer that is the reverse
@@ -86,6 +136,15 @@ ordering of numbers.
     reverseInt(-15) === -51
     reverseInt(-90) === -9
  */
+function intrev(a) {
+  let str = a.toString();
+  console.log(typeof str);
+  let news = str.split("").reverse().join("");
+  let latestnews = parseInt(news);
+  console.log(latestnews);
+  console.log(typeof latestnews);
+}
+intrev(34678)
 
 /* 6) STEPS
 
@@ -109,6 +168,18 @@ step has spaces on the right hand side!
         '### '
         '####' */
 
+const hashes = function (n) {
+  let str = "";
+  for (i = 0; i <= n; i++) {
+    for (j = 0; j < i; j++) {
+      str += "#";
+    }
+    str += "\n";
+  }
+  console.log(str);
+};
+hashes(5)
+
 /* 7) REVERSE STRING
 
 Given a string, return a new string with the reversed
@@ -120,7 +191,16 @@ order of characters
     reverse('hello') === 'olleh'
     reverse('Greetings!') === '!sgniteerG'
  */
-
+const stringrev = function (str) {
+  let newstr = str.split("");
+  let revstr = [];
+  for (let i = 0; i < newstr.length; i++) {
+    revstr.push(newstr[newstr.length - 1 - i]);
+  }
+  revstr1 = revstr.join("");
+  console.log(revstr1);
+};
+stringrev('hello')
 /* 8) CHUNK
 
 Given an array and chunk size, divide the array into many subarrays
@@ -134,6 +214,36 @@ where each subarray is of length size
     chunk([1, 2, 3, 4, 5], 4) --> [[ 1, 2, 3, 4], [5]]
     chunk([1, 2, 3, 4, 5], 10) --> [[ 1, 2, 3, 4, 5]]
 */
+const chunk = function (a, s) {
+  let big = [];
+  let small = [];
+  let nextsmall = [];
+  let final = [];
+  let n = a.length / s;
+  console.log(n);
+  for (i = 0; i < a.length; i++) {
+    if (i < n) {
+      small.push(a[i]);
+    } else if (i >= n && i <= n + n) {
+      nextsmall.push(a[i]);
+    } else if (i >= n + n) {
+      final.push(a[i]);
+    }
+  }
+  big.push(small);
+  big.push(nextsmall);
+  big.push(final);
+  console.log(big);
+};
+
+chunk([1, 2, 3, 4], 2);
+chunk([1, 2, 3, 4, 5, 6, 7, 8], 3);
+chunk([1, 2, 3, 4, 5], 10);
+
+// let a=[2,3,4]
+// b=[2,3]
+// a.push(b)
+// console.log("Hey",a)
 
 /* 9) PYRAMID
 
@@ -153,6 +263,21 @@ pyramid has spaces on both the left and right hand sides
         '  #  '
         ' ### '
         '#####' */
+
+const pyramid = function (n) {
+  let str = "";
+  for (let i = 0; i <= n; i++) {
+    for (let j = 0; j < n - i; j++) {
+      str += " ";
+    }
+    for (let k = 0; k < 2 * i - 1; k++) {
+      str += "*";
+    }
+    str += "\n";
+  }
+  console.log(str);
+};
+ pyramid(5)
 
 /* 10) SPYRAL MATRIX
 
@@ -175,3 +300,45 @@ and returns a NxN spiral matrix.
         [10,  9,  8, 7]]
 
 */
+function matrix(n) {
+  const results = [];
+
+  for (let i = 0; i < n; i++) {
+    results.push([]);
+  }
+
+  let counter = 1;
+
+  let startColumn = 0;
+  let endColumn = n - 1;
+  let startRow = 0;
+  let endRow = n - 1;
+
+  while (startColumn <= endColumn && startRow <= endRow) {
+    for (let i = startColumn; i <= endColumn; i++) {
+      results[startRow][i] = counter;
+      counter++;
+    }
+    startRow++;
+
+    for (let i = startRow; i <= endRow; i++) {
+      results[i][endColumn] = counter;
+      counter++;
+    }
+    endColumn--;
+
+    for (let i = endColumn; i >= startColumn; i--) {
+      results[endRow][i] = counter;
+      counter++;
+    }
+    endRow--;
+
+    for (let i = endRow; i >= startRow; i--) {
+      results[i][startColumn] = counter;
+      counter++;
+    }
+    startColumn++;
+  }
+  return results;
+}
+console.log(matrix(5));
